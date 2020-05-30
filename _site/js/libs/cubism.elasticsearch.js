@@ -165,7 +165,12 @@ cubism.elasticsearch = function(context, options, callback) {
            start     = +start,
            stop      = +stop,
            metric_id = node.id+'-'+expression
-
+      if (expression == 'os.cpu_percent') {
+        // HACK ... because I can't find where cpu_percent string is being generated
+        expression = 'os.cpu.percent';
+        metric_id = node.id + '-' + expression;
+      }
+      
       d3.json(source.url(), function(data) {
         if (!data)                return callback(new Error("Unable to load data from ElasticSearch!"))
         if (!data.nodes[node.id]) return callback(new Error("Unable to find node " + node.id + "!"))
