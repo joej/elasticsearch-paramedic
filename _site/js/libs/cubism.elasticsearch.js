@@ -267,7 +267,7 @@ cubism.elasticsearch = function(context, options, callback) {
   })
 
   source.toString = function() { return options.host };
-  source.url      = function() { return options.host + "/_nodes/stats?all" };
+  source.url      = function() { return options.host + "/_nodes/stats" };
 
   return source;
 };
