@@ -1,6 +1,8 @@
 ElasticSearch Paramedic
 =======================
 
+UPDATED to work with Elasticsearch 6.8.5 REST calls now.
+
 Paramedic is a simple yet sexy tool to monitor and inspect [ElasticSearch](http://elasticsearch.org) clusters.
 
 It displays real-time statistics and information about your nodes and indices,
