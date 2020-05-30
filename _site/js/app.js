@@ -148,7 +148,7 @@ App.nodes = Ember.ArrayController.create({
           node
             .set("disk", (data.nodes[node_id]['indices']['store']['size_in_bytes']/1000000).toFixed(2) + " MB")
             .set("docs", data.nodes[node_id]['indices']['docs']['count'])
-            .set("load", data.nodes[node_id]['os']['load_average'].toFixed(3))
+            .set("load", data.nodes[node_id]['os']['cpu']['load_average']['1m'].toFixed(3))
             .set("cpu",  data.nodes[node_id]['process']['cpu']['percent'])
             .set("jvm_heap_used", (data.nodes[node_id]['jvm']['mem']['heap_used_in_bytes']/1000000).toFixed(2))
         }
@@ -156,8 +156,8 @@ App.nodes = Ember.ArrayController.create({
     };
 
     App.set("refreshing", true)
-    $.getJSON(App.elasticsearch_url+"/_nodes?jvm", __load_nodes_info);
-    $.getJSON(App.elasticsearch_url+"/_nodes/stats?indices&os&process&jvm", __load_nodes_stats);
+    $.getJSON(App.elasticsearch_url+"/_nodes/stats/jvm", __load_nodes_info);
+    $.getJSON(App.elasticsearch_url+"/_nodes/stats/indices,os,process,jvm", __load_nodes_stats);
   }
 });
 
